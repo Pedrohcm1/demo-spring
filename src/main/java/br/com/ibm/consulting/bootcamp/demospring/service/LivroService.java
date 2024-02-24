@@ -27,12 +27,12 @@ public class LivroService {
 	}
 	
 	public void alterar(long id, Livro novoLivro) {
-		var alterado = new Livro(id, novoLivro.getAutor(), novoLivro.getTitulo(), novoLivro.getAnoPublicacao());
+		var alterado = new Livro(id, novoLivro.getAutor(), novoLivro.getTitulo(), novoLivro.getAnoPublicacao(), null, null, null, null);
 		repository.saveAndFlush(alterado);
 	}
 	
 	public void excluir(long id) {
-		var excluir = new Livro(id, null, null, null);
+		var excluir = new Livro(id, null, null, null, null, null, null, null);
 		repository.delete(excluir);
 	}
 

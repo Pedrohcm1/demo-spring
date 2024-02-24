@@ -1,4 +1,14 @@
-package br.com.ibm.consulting.bootcamp.demospring.controller;
+package br.com.ibm.consulting.bootcamp.demospring.domain;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table
