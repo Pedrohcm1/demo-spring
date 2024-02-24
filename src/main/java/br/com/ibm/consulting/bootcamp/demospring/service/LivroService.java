@@ -27,7 +27,7 @@ public class LivroService {
 	}
 	
 	public void alterar(long id, Livro novoLivro) {
-		var alterado = new Livro(id, novoLivro.getAutor(), novoLivro.getTitulo(), novoLivro.getAnoPublicacao(), null, null, null, null);
+		var alterado = new Livro(id, novoLivro.getAutor(), novoLivro.getTitulo(), novoLivro.getAnoPublicacao(), novoLivro.getDescricao(), novoLivro.getGenero(), novoLivro.getPedido(), novoLivro.getEstoque());
 		repository.saveAndFlush(alterado);
 	}
 	
