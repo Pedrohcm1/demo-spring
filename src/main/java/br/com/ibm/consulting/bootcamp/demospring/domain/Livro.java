@@ -22,16 +22,32 @@ public class Livro {
 
 	@JsonProperty("ano_publicacao")
 	private String anoPublicacao;
+
+	private String descricao;
+
+	private String genero;
+
+	@ManyToOne
+	@JsonIgnoreProperties("livro")
+	private Pedido pedido;
+
+	@ManyToOne
+	@JsonIgnoreProperties("livro")
+	private Estoque estoque;
 	
 	public Livro() {
 		
 	}
-	
-	public Livro(long id, String autor, String titulo, String anoPublicacao) {
+
+	public Livro(long id, String autor, String titulo, String anoPublicacao, String descricao, String genero, Pedido pedido, Estoque estoque) {
 		this.id = id;
 		this.autor = autor;
 		this.titulo = titulo;
 		this.anoPublicacao = anoPublicacao;
+		this.descricao = descricao;
+		this.genero = genero;
+		this.pedido = pedido;
+		this.estoque = estoque;
 	}
 
 	public long getId() {
@@ -66,4 +82,30 @@ public class Livro {
 		this.anoPublicacao = anoPublicacao;
 	}
 
+	public String getDescricao() { return descricao;}
+
+	public void setDescricao(String descricao) { this.descricao = descricao;}
+
+	public String getGenero() { return genero;}
+
+	public void setGenero(String genero) { this.genero = genero;}
+
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+
+	public Estoque getEstoque() {
+		return estoque;
+	}
+
+	public void setEstoque(Estoque estoque) {
+		this.estoque = estoque;
+	}
+
+
 }
+
