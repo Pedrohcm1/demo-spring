@@ -7,6 +7,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -14,11 +17,15 @@ import jakarta.persistence.Table;
 @Table
 public class Estoque {
 
-    private Long estoque;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "estoque", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("estoque")
     private List<Livro> livro;
+
+	private Long estoque;
 
     public Estoque(Long estoque, List<Livro> livro) {
         this.estoque = estoque;

@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table
 public class Livro {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -36,12 +36,13 @@ public class Livro {
 	@ManyToOne
 	@JsonIgnoreProperties("livro")
 	private Estoque estoque;
-	
+
 	public Livro() {
-		
+
 	}
 
-	public Livro(long id, String autor, String titulo, String anoPublicacao, String descricao, String genero, Pedido pedido, Estoque estoque) {
+	public Livro(long id, String autor, String titulo, String anoPublicacao, String descricao, String genero,
+			Pedido pedido, Estoque estoque) {
 		this.id = id;
 		this.autor = autor;
 		this.titulo = titulo;
@@ -84,13 +85,21 @@ public class Livro {
 		this.anoPublicacao = anoPublicacao;
 	}
 
-	public String getDescricao() { return descricao;}
+	public String getDescricao() {
+		return descricao;
+	}
 
-	public void setDescricao(String descricao) { this.descricao = descricao;}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
-	public String getGenero() { return genero;}
+	public String getGenero() {
+		return genero;
+	}
 
-	public void setGenero(String genero) { this.genero = genero;}
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
 
 	public Pedido getPedido() {
 		return pedido;
@@ -108,6 +117,4 @@ public class Livro {
 		this.estoque = estoque;
 	}
 
-
 }
-

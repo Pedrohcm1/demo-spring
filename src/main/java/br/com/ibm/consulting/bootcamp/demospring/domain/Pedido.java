@@ -21,57 +21,57 @@ import jakarta.persistence.Table;
 @Table
 public class Pedido {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 
-    @UpdateTimestamp
-    private LocalDateTime data;
+	@UpdateTimestamp
+	private LocalDateTime data;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pedido", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties("pedido")
-    private List<Livro> livro;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pedido", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("pedido")
+	private List<Livro> livro;
 
-    @ManyToOne
-    @JsonIgnoreProperties("pedido")
-    private Usuario usuario;
+	@ManyToOne
+	@JsonIgnoreProperties("pedido")
+	private Usuario usuario;
 
-    public Pedido(long id, LocalDateTime data, List<Livro> livro, Usuario usuario) {
-        this.id = id;
-        this.data = data;
-        this.livro = livro;
-        this.usuario = usuario;
-    }
+	public Pedido(long id, LocalDateTime data, List<Livro> livro, Usuario usuario) {
+		this.id = id;
+		this.data = data;
+		this.livro = livro;
+		this.usuario = usuario;
+	}
 
-    public long getId() {
-        return id;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public LocalDateTime getData() {
-        return data;
-    }
+	public LocalDateTime getData() {
+		return data;
+	}
 
-    public void setData(LocalDateTime data) {
-        this.data = data;
-    }
+	public void setData(LocalDateTime data) {
+		this.data = data;
+	}
 
-    public List<Livro> getLivro() {
-        return livro;
-    }
+	public List<Livro> getLivro() {
+		return livro;
+	}
 
-    public void setLivro(List<Livro> livro) {
-        this.livro = livro;
-    }
+	public void setLivro(List<Livro> livro) {
+		this.livro = livro;
+	}
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
+	public Usuario getUsuario() {
+		return usuario;
+	}
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 }
