@@ -1,5 +1,6 @@
 package br.com.ibm.consulting.bootcamp.demospring.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,18 @@ public class PedidoService {
 	
 	public Pedido obter(long id) {
 		return repository.findById(id).orElse(null);
+	}
+	
+	public List<Pedido> listarPorUsuario(String usuario) {
+		return repository.findAllByUsuarioContainingIgnoreCase(usuario);
+	}
+	
+	public List<Pedido> listarPorTitulo(String titulo) {
+		return repository.findAllByTituloContainingIgnoreCase(titulo);
+	}
+	
+	public List<Pedido> listarPorData(LocalDateTime data) {
+		return repository.findAllByDataContainingIgnoreCase(data);
 	}
 	
 	public void alterar(long id, Pedido novoPedido) {

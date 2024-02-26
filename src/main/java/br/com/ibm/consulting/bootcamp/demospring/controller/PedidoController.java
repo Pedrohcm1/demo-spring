@@ -1,5 +1,6 @@
 package br.com.ibm.consulting.bootcamp.demospring.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ibm.consulting.bootcamp.demospring.domain.Pedido;
+import br.com.ibm.consulting.bootcamp.demospring.domain.Usuario;
 import br.com.ibm.consulting.bootcamp.demospring.service.PedidoService;
 
 @RestController
@@ -43,6 +45,21 @@ public class PedidoController {
 			return new ResponseEntity<Pedido>(pedido, HttpStatus.OK);
 		}
 		return new ResponseEntity<Pedido>(pedido, HttpStatus.NOT_FOUND);
+	}
+	
+	@GetMapping("/usuario/{usuario}")
+	public ResponseEntity<List<Pedido>> getByUsuario(@PathVariable String usuario) {
+		return ResponseEntity.ok(service.listarPorUsuario(usuario));
+	}
+	
+	@GetMapping("/titulo/{titulo}")
+	public ResponseEntity<List<Pedido>> getByTitulo(@PathVariable String titulo) {
+		return ResponseEntity.ok(service.listarPorTitulo(titulo));
+	}
+	
+	@GetMapping("/data/{data}")
+	public ResponseEntity<List<Pedido>> getByData(@PathVariable LocalDateTime data) {
+		return ResponseEntity.ok(service.listarPorData(data));
 	}
 
 	@PutMapping("/{id}")

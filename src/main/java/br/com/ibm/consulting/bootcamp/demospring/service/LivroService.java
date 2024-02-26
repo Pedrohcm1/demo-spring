@@ -22,8 +22,20 @@ public class LivroService {
 		return repository.findAll();
 	}
 	
-	public Livro obter(long id) {
+	public Livro listarPorId(long id) {
 		return repository.findById(id).orElse(null);
+	}
+	
+	public List<Livro> listarPorTitulo(String titulo) {
+		return repository.findAllByTituloContainingIgnoreCase(titulo);
+	}
+	
+	public List<Livro> listarPorAutor(String autor) {
+		return repository.findAllByAutorContainingIgnoreCase(autor);
+	}
+	
+	public List<Livro> listarPorAno(String ano) {
+		return repository.findAllByAnoContainingIgnoreCase(ano);
 	}
 	
 	public void alterar(long id, Livro novoLivro) {
@@ -35,6 +47,4 @@ public class LivroService {
 		var excluir = new Livro(id, null, null, null, null, null, null, null);
 		repository.delete(excluir);
 	}
-
-
 }

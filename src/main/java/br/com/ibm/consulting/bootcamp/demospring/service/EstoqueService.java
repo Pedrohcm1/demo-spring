@@ -28,6 +28,14 @@ public class EstoqueService {
 		return repository.findById(id).orElse(null);
 	}
 	
+	public List<Estoque> listarPorTitulo(String titulo) {
+		return repository.findAllByTituloContainingIgnoreCase(titulo);
+	}
+	
+	public List<Estoque> listarPorCategoria(String categoria) {
+		return repository.findAllByCategoriaContainingIgnoreCase(categoria);
+	}
+	
 	public void alterar(long id, Estoque novoEstoque) {
 		var alterado = new Estoque(novoEstoque.getEstoque(), novoEstoque.getLivro());
 		repository.saveAndFlush(alterado);

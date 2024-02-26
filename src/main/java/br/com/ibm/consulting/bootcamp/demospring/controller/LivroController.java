@@ -15,57 +15,66 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.ibm.consulting.bootcamp.demospring.domain.Estoque;
 import br.com.ibm.consulting.bootcamp.demospring.domain.Livro;
-import br.com.ibm.consulting.bootcamp.demospring.repository.LivroRepository;
 import br.com.ibm.consulting.bootcamp.demospring.service.LivroService;
 
 @RestController
 @RequestMapping("/api/livros")
 public class LivroController {
-	
+
 	@Autowired
 	LivroService service;
-	
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Livro criar(@RequestBody Livro livro) {
 		return service.criarLivro(livro);
 	}
-	
+
 	@GetMapping
 	public List<Livro> listar() {
 		return service.listar();
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Livro> obter(@PathVariable long id) {
-		var livro = service.obter(id);
+		var livro = service.listarPorId(id);
 		if (livro != null) {
 			return new ResponseEntity<Livro>(livro, HttpStatus.OK);
 		}
 		return new ResponseEntity<Livro>(livro, HttpStatus.NOT_FOUND);
 	}
-	
+
 	@GetMapping("/titulo/{titulo}")
-	public ResponseEntity<List<Livro>> getByTitle(@PathVariable String titulo){
-		return ResponseEntity.ok(LivroRepository.findAllByTituloContainingIgnoreCase(titulo));}
+	public ResponseEntity<List<Livro>> getByTitulo(@PathVariable String titulo) {
+		return ResponseEntity.ok(service.listarPorTitulo(titulo));
+	}
 	
+	@GetMapping("/autor/{autor}")
+	public ResponseEntity<List<Livro>> getByAutor(@PathVariable String autor) {
+		return ResponseEntity.ok(service.listarPorAutor(autor));
+	}
+	
+	@GetMapping("/ano/{ano}")
+	public ResponseEntity<List<Livro>> getByAno(@PathVariable String ano) {
+		return ResponseEntity.ok(service.listarPorAno(ano));
+	}
+
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<Void> atualizar(@RequestBody Livro livro, @PathVariable long id) {
-		var livroExistente = service.obter(id);
+		var livroExistente = service.listarPorId(id);
 		if (livroExistente != null) {
 			service.alterar(id, livro);
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<Void> excluir(@PathVariable long id) {
-		var livroExistente = service.obter(id);
+		var livroExistente = service.listarPorId(id);
 		if (livroExistente != null) {
 			service.excluir(id);
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);

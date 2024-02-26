@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.ibm.consulting.bootcamp.demospring.domain.Livro;
 import br.com.ibm.consulting.bootcamp.demospring.domain.Usuario;
 
 import br.com.ibm.consulting.bootcamp.demospring.service.UsuarioService;
@@ -46,6 +47,21 @@ public class UsuarioController {
 		return new ResponseEntity<Usuario>(usuario, HttpStatus.NOT_FOUND);
 	}
 	
+	@GetMapping("/nome/{nome}")
+	public ResponseEntity<List<Usuario>> getByNome(@PathVariable String nome) {
+		return ResponseEntity.ok(service.listarPorNome(nome));
+	}
+	
+	@GetMapping("/tipo/{tipo}")
+	public ResponseEntity<List<Usuario>> getByTipo(@PathVariable String tipo) {
+		return ResponseEntity.ok(service.listarPorTipo(tipo));
+	}
+	
+	@GetMapping("/pedido/{pedido}")
+	public ResponseEntity<List<Usuario>> getByPedido(@PathVariable String pedido) {
+		return ResponseEntity.ok(service.listarPorPedido(pedido));
+	}
+		
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<Void> atualizar(@RequestBody Usuario usuario, @PathVariable long id) {

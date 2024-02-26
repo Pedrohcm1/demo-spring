@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.com.ibm.consulting.bootcamp.demospring.domain.Livro;
 import br.com.ibm.consulting.bootcamp.demospring.domain.Usuario;
 import br.com.ibm.consulting.bootcamp.demospring.repository.UsuarioRepository;
 
@@ -24,6 +25,18 @@ public class UsuarioService {
 	
 	public Usuario obter(long id) {
 		return repository.findById(id).orElse(null);
+	}
+	
+	public List<Usuario> listarPorNome(String nome) {
+		return repository.findAllByNomeContainingIgnoreCase(nome);
+	}
+	
+	public List<Usuario> listarPorTipo(String tipo) {
+		return repository.findAllByTipoContainingIgnoreCase(tipo);
+	}
+	
+	public List<Usuario> listarPorPedido(String pedido) {
+		return repository.findAllByPedidoContainingIgnoreCase(pedido);
 	}
 	
 	public void alterar(long id, Usuario novoUsuario) {

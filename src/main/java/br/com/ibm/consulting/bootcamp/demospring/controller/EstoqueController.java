@@ -42,6 +42,16 @@ public class EstoqueController {
 		return new ResponseEntity<Estoque>(estoque, HttpStatus.NOT_FOUND);
 	}
 	
+	@GetMapping("/titulo/{titulo}")
+	public ResponseEntity<List<Estoque>> getByTitulo(@PathVariable String titulo) {
+		return ResponseEntity.ok(service.listarPorTitulo(titulo));
+	}
+	
+	@GetMapping("/categoria/{categoria}")
+	public ResponseEntity<List<Estoque>> getByCategoria(@PathVariable String categoria) {
+		return ResponseEntity.ok(service.listarPorCategoria(categoria));
+	}
+	
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public ResponseEntity<Void> atualizar(@RequestBody Estoque estoque, @PathVariable long id) {
