@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.ibm.consulting.bootcamp.demospring.domain.Estoque;
 import br.com.ibm.consulting.bootcamp.demospring.domain.Livro;
+import br.com.ibm.consulting.bootcamp.demospring.repository.LivroRepository;
 import br.com.ibm.consulting.bootcamp.demospring.service.LivroService;
 
 @RestController
@@ -44,6 +46,10 @@ public class LivroController {
 		}
 		return new ResponseEntity<Livro>(livro, HttpStatus.NOT_FOUND);
 	}
+	
+	@GetMapping("/titulo/{titulo}")
+	public ResponseEntity<List<Livro>> getByTitle(@PathVariable String titulo){
+		return ResponseEntity.ok(LivroRepository.findAllByTituloContainingIgnoreCase(titulo));}
 	
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)

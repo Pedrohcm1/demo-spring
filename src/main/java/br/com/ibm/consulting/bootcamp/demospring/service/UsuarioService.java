@@ -14,7 +14,7 @@ public class UsuarioService {
 	@Autowired
 	UsuarioRepository repository;
 	
-	public Usuario criarLivro(Usuario l) {
+	public Usuario criarUsuario(Usuario l) {
 		return repository.saveAndFlush(l);
 	}
 	

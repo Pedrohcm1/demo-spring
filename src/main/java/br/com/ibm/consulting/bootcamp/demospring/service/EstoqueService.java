@@ -16,7 +16,7 @@ public class EstoqueService {
 	@Autowired
 	EstoqueRepository repository;
 	
-	public Estoque criarLivro(Estoque l) {
+	public Estoque criarEstoque(Estoque l) {
 		return repository.saveAndFlush(l);
 	}
 	
